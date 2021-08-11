@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,7 +60,14 @@ public class BasicController {
         return "basic/basic-objects";
     }
 
+    @GetMapping("/date")
+    public String date(Model model) {
+        model.addAttribute("localDateTime", LocalDateTime.now());
+        return "basic/date";
+    }
+
     // 테스트용 스프링 빈을 만드는 것
+    // 빈이란 건 결국 하나의 객체를 그냥 싱글톤 레지스트리에 올리는 것
     @Component("helloBean")
     static class HelloBean {
         public String hello(String data) {
