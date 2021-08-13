@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 // thymeleaf가 package 이름인거 까먹었었음..
 // `@SpringBootApplication` 애노테이션과 같은 레벨에서 만들어줘야
@@ -91,6 +88,34 @@ public class BasicController {
     @GetMapping("/attribute")
     public String attribute() {
         return "basic/attribute";
+    }
+
+    @GetMapping("/each")
+    public String each(Model model) {
+        addUsers(model);
+        return "basic/each";
+    }
+
+    private void addUsers(Model model) {
+        List<User> users = Arrays.asList(
+                new User("userA", 10),
+                new User("userB", 20),
+                new User("userC", 30)
+        );
+
+        model.addAttribute("users", users);
+    }
+
+    @GetMapping("/condition")
+    public String condition(Model model) {
+        addUsers(model);
+        return "basic/condition";
+    }
+
+    @GetMapping("/comments")
+    public String comments(Model model) {
+        model.addAttribute("data", "Spring!");
+        return "basic/comments";
     }
 
     // 테스트용 스프링 빈을 만드는 것
