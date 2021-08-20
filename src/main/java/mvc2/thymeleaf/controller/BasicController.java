@@ -124,6 +124,14 @@ public class BasicController {
         return "basic/block";
     }
 
+    @GetMapping("/javascript")
+    public String javascript(Model model) {
+        model.addAttribute("user", new User("userA", 10));
+        addUsers(model);
+
+        return "basic/javascript";
+    }
+
     // 테스트용 스프링 빈을 만드는 것
     // 빈이란 건 결국 하나의 객체를 그냥 싱글톤 레지스트리에 올리는 것
     @Component("helloBean")
